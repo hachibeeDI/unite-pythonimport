@@ -7,7 +7,7 @@ let s:pythonimport_source = {
 
 " 辞書変数のリストを返す関数
 function! s:pythonimport_source.gather_candidates(args, context)
-  let importable_list = Pythonimport_define()
+  let importable_list = s:get_module_sources()
   return map(
         \ importable_list,
         \ '{
@@ -20,7 +20,7 @@ function! s:pythonimport_source.gather_candidates(args, context)
 endfunction
 
 " unite用のリストを作成する
-function! Pythonimport_define()
+function! s:get_module_sources()
 
   python <<EOM
 from pydoc import ModuleScanner
@@ -40,10 +40,10 @@ def onerror(modname):
 
 ModuleScanner().run(callback, onerror=onerror)
 
-vim.command('let modules = {0}'.format(modules))
+vim.command('let l:modules = {0}'.format(modules))
 EOM
 
-  return modules
+  return l:modules
 endfunction
 
 

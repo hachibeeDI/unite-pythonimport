@@ -10,7 +10,7 @@ function! s:pythonimport(x)
   let line = printf("import %s", a:module)
   let newpos = search('^import', 'b')
   if newpos == 0
-    call cursor(1, 3) " magic -> empty line -> modules
+    call cursor(1, 3) " 1:magic -> 2:empty line -> 3:modules
   else
     call cursor(newpos)
     call cursor(search('^[^ ]\|^$'))
