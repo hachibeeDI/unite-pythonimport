@@ -48,8 +48,7 @@ endfunction
 
 
 function! unite#sources#pythonimport#define()
-  " TODO: +python有効か調べるやつ
-  return s:pythonimport_source
+  return has('python') ? s:pythonimport_source : []
 endfunction
 
 let &cpo = s:save_cpo
